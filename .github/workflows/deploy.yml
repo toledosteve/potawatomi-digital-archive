@@ -14,6 +14,19 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# Google Sheets Configuration
+# Set these as repository variables in Settings > Secrets and variables > Actions > Variables
+# Each should be just the SHEET_ID from the Google Sheets URL:
+# https://docs.google.com/spreadsheets/d/SHEET_ID/edit
+#
+# Required variables:
+#   SHEET_PHOTOGRAPHS
+#   SHEET_DOCUMENTS
+#   SHEET_PUBLICATIONS
+#   SHEET_ORAL_HISTORIES
+#   SHEET_STORIES
+#   SHEET_TRIBAL_HISTORY
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,6 +53,65 @@ jobs:
           mkdir -p _site/collections/oral-histories
           mkdir -p _site/collections/stories
           mkdir -p _site/collections/tribal-history
+
+      # Fetch metadata from Google Sheets
+      - name: Fetch metadata from Google Sheets
+        run: |
+          echo "Fetching metadata from Google Sheets..."
+
+          # Photographs
+          if [ -n "${{ vars.SHEET_PHOTOGRAPHS }}" ]; then
+            curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_PHOTOGRAPHS }}/export?format=csv" \
+              -o collections/photographs/_data/photographs-metadata.csv
+            echo "✓ Fetched photographs metadata"
+          else
+            echo "⚠ SHEET_PHOTOGRAPHS not set, using local CSV"
+          fi
+
+          # Documents
+          if [ -n "${{ vars.SHEET_DOCUMENTS }}" ]; then
+            curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_DOCUMENTS }}/export?format=csv" \
+              -o collections/documents/_data/documents-metadata.csv
+            echo "✓ Fetched documents metadata"
+          else
+            echo "⚠ SHEET_DOCUMENTS not set, using local CSV"
+          fi
+
+          # Publications
+          if [ -n "${{ vars.SHEET_PUBLICATIONS }}" ]; then
+            curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_PUBLICATIONS }}/export?format=csv" \
+              -o collections/publications/_data/publications-metadata.csv
+            echo "✓ Fetched publications metadata"
+          else
+            echo "⚠ SHEET_PUBLICATIONS not set, using local CSV"
+          fi
+
+          # Oral Histories
+          if [ -n "${{ vars.SHEET_ORAL_HISTORIES }}" ]; then
+            curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_ORAL_HISTORIES }}/export?format=csv" \
+              -o collections/oral-histories/_data/oral-histories-metadata.csv
+            echo "✓ Fetched oral-histories metadata"
+          else
+            echo "⚠ SHEET_ORAL_HISTORIES not set, using local CSV"
+          fi
+
+          # Stories
+          if [ -n "${{ vars.SHEET_STORIES }}" ]; then
+            curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_STORIES }}/export?format=csv" \
+              -o collections/stories/_data/stories-metadata.csv
+            echo "✓ Fetched stories metadata"
+          else
+            echo "⚠ SHEET_STORIES not set, using local CSV"
+          fi
+
+          # Tribal History
+          if [ -n "${{ vars.SHEET_TRIBAL_HISTORY }}" ]; then
+            curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_TRIBAL_HISTORY }}/export?format=csv" \
+              -o collections/tribal-history/_data/tribal-history-metadata.csv
+            echo "✓ Fetched tribal-history metadata"
+          else
+            echo "⚠ SHEET_TRIBAL_HISTORY not set, using local CSV"
+          fi
 
       # Build Hub
       - name: Build Hub

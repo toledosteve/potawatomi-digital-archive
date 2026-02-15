@@ -129,7 +129,10 @@ jobs:
         run: |
           cd collections/photographs
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/photographs"
+          echo "parent-site:" > _config_build.yml
+          echo "  title: \"Potawatomi Digital Archive\"" >> _config_build.yml
+          echo "  url: \"${{ steps.pages.outputs.base_path }}/hub/\"" >> _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/photographs" --config _config.yml,_config_build.yml
           cp -r _site/* ../../_site/collections/photographs/
         env:
           JEKYLL_ENV: production
@@ -139,7 +142,10 @@ jobs:
         run: |
           cd collections/documents
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/documents"
+          echo "parent-site:" > _config_build.yml
+          echo "  title: \"Potawatomi Digital Archive\"" >> _config_build.yml
+          echo "  url: \"${{ steps.pages.outputs.base_path }}/hub/\"" >> _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/documents" --config _config.yml,_config_build.yml
           cp -r _site/* ../../_site/collections/documents/
         env:
           JEKYLL_ENV: production
@@ -149,7 +155,10 @@ jobs:
         run: |
           cd collections/publications
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/publications"
+          echo "parent-site:" > _config_build.yml
+          echo "  title: \"Potawatomi Digital Archive\"" >> _config_build.yml
+          echo "  url: \"${{ steps.pages.outputs.base_path }}/hub/\"" >> _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/publications" --config _config.yml,_config_build.yml
           cp -r _site/* ../../_site/collections/publications/
         env:
           JEKYLL_ENV: production
@@ -159,7 +168,10 @@ jobs:
         run: |
           cd collections/oral-histories
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/oral-histories"
+          echo "parent-site:" > _config_build.yml
+          echo "  title: \"Potawatomi Digital Archive\"" >> _config_build.yml
+          echo "  url: \"${{ steps.pages.outputs.base_path }}/hub/\"" >> _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/oral-histories" --config _config.yml,_config_build.yml
           cp -r _site/* ../../_site/collections/oral-histories/
         env:
           JEKYLL_ENV: production
@@ -169,7 +181,10 @@ jobs:
         run: |
           cd collections/stories
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/stories"
+          echo "parent-site:" > _config_build.yml
+          echo "  title: \"Potawatomi Digital Archive\"" >> _config_build.yml
+          echo "  url: \"${{ steps.pages.outputs.base_path }}/hub/\"" >> _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/stories" --config _config.yml,_config_build.yml
           cp -r _site/* ../../_site/collections/stories/
         env:
           JEKYLL_ENV: production
@@ -179,7 +194,10 @@ jobs:
         run: |
           cd collections/tribal-history
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/tribal-history"
+          echo "parent-site:" > _config_build.yml
+          echo "  title: \"Potawatomi Digital Archive\"" >> _config_build.yml
+          echo "  url: \"${{ steps.pages.outputs.base_path }}/hub/\"" >> _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/tribal-history" --config _config.yml,_config_build.yml
           cp -r _site/* ../../_site/collections/tribal-history/
         env:
           JEKYLL_ENV: production

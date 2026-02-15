@@ -1,0 +1,47 @@
+---
+layout: default
+title: Timeline
+permalink: /timeline/
+---
+
+<div class="container py-4">
+  <h1>Timeline</h1>
+  <p class="text-muted">Items arranged chronologically</p>
+
+  <div class="mt-4">
+    {% assign sorted = site.data.tribal-history-metadata | sort: "date" %}
+    {% for item in sorted %}
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-2 text-md-end">
+        <span class="badge bg-primary fs-6 py-2 px-3">{{ item.date }}</span>
+      </div>
+      <div class="col-md-1 text-center d-none d-md-block">
+        <div style="width: 16px; height: 16px; background: var(--primary, #2c5282); border-radius: 50%; margin: 0 auto;"></div>
+      </div>
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <p class="card-text small text-muted">
+              <strong>Location:</strong> {{ item.location }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .row.mb-4:not(:last-child) .col-md-1::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 100%;
+    background: #dee2e6;
+    margin: 0 auto;
+    min-height: 50px;
+  }
+</style>

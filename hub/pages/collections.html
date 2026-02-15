@@ -1,0 +1,75 @@
+---
+layout: page
+title: Collections
+permalink: /collections/
+description: Browse all collections in the Potawatomi Digital Archive
+---
+
+<p class="lead mb-4">
+  Our archive is organized by material type, making it easy to find the kind of content you're looking for. Each item is tagged with family names, subjects, and people, allowing you to discover connections across collections.
+</p>
+
+<div class="alert alert-info mb-5">
+  <i class="bi bi-lightbulb me-2"></i>
+  <strong>Looking for a specific family?</strong> Visit our <a href="{{ '/families/' | relative_url }}">Browse by Family</a> page to see all materials connected to individual Potawatomi families.
+</div>
+
+<div class="row g-4">
+  {% for collection in site.featured_collections %}
+  <div class="col-md-6 col-lg-4">
+    <div class="card h-100 shadow-sm collection-card">
+      <div class="card-body text-center py-4">
+        <div class="collection-icon mb-3">
+          <i class="{{ collection.icon | default: 'bi-archive' }}" style="font-size: 3rem; color: var(--primary-blue);"></i>
+        </div>
+        <h4 class="card-title fw-bold">{{ collection.title }}</h4>
+        <p class="card-text text-muted">{{ collection.description }}</p>
+        <div class="mt-3">
+          <span class="badge bg-light text-dark me-2">{{ collection.item_count }} items</span>
+        </div>
+      </div>
+      <div class="card-footer bg-white border-0 text-center pb-4">
+        <a href="{{ collection.url | relative_url }}" class="btn btn-primary">
+          Browse Collection <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Cross-referencing explanation -->
+<div class="mt-5 p-4 bg-light rounded">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <h4 class="fw-bold">How Our Collections Work</h4>
+      <p class="mb-2">Each item in our archive includes metadata that connects it to:</p>
+      <ul class="mb-0">
+        <li><strong>Families</strong> - Family names connected to the item (e.g., Toledo, Wabaunsee, Bourassa)</li>
+        <li><strong>Subjects</strong> - Topics and themes (e.g., Trail of Death, Pow Wow, Treaties)</li>
+        <li><strong>People</strong> - Individual names when known</li>
+      </ul>
+      <p class="mt-2 mb-0">This allows a single photograph to appear when browsing multiple families, helping you discover unexpected connections.</p>
+    </div>
+    <div class="col-lg-4 text-center mt-3 mt-lg-0">
+      <a href="{{ '/families/' | relative_url }}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-people me-2"></i>Browse by Family
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Contribute CTA -->
+<div class="mt-4 p-4 border rounded">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <h4 class="fw-bold">Have materials to contribute?</h4>
+      <p class="mb-lg-0">Help us grow our collections by sharing photographs, documents, recordings, or family stories.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end">
+      <a href="{{ '/contribute/' | relative_url }}" class="btn btn-accent btn-lg">
+        <i class="bi bi-plus-circle me-2"></i>Submit Materials
+      </a>
+    </div>
+  </div>
+</div>

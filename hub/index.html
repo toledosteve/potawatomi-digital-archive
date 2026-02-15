@@ -1,0 +1,188 @@
+---
+layout: home
+title: Home
+---
+
+<!-- Featured Collections Section -->
+<section class="featured-collections py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Explore Our Collections</h2>
+      <p class="text-muted lead">Browse materials organized by type, or explore by family</p>
+    </div>
+
+    <div class="row g-4">
+      {% for collection in site.featured_collections limit:6 %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 collection-card shadow-sm">
+          <div class="card-body text-center py-4">
+            <div class="collection-icon mb-3">
+              <i class="{{ collection.icon | default: 'bi-archive' }}" style="font-size: 2.5rem; color: var(--primary-blue);"></i>
+            </div>
+            <h5 class="card-title fw-bold">{{ collection.title }}</h5>
+            <p class="card-text text-muted small">{{ collection.description }}</p>
+            <span class="badge bg-light text-dark">{{ collection.item_count }} items</span>
+          </div>
+          <div class="card-footer bg-white border-0 text-center pb-4">
+            <a href="{{ collection.url | relative_url }}" class="btn btn-outline-primary">
+              Browse <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ '/collections/' | relative_url }}" class="btn btn-primary btn-lg">
+        View All Collections <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Browse by Family Section -->
+<section class="families-preview py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <h2 class="fw-bold mb-3">Browse by Family</h2>
+        <p class="lead">
+          Discover materials connected to specific Potawatomi families. Items are tagged with family names, allowing you to find photographs, documents, stories, and recordings related to your ancestors.
+        </p>
+        <p class="text-muted">
+          Our interconnected metadata means a single item can appear under multiple families when it documents relationships between them.
+        </p>
+        <a href="{{ '/families/' | relative_url }}" class="btn btn-primary">
+          <i class="bi bi-people me-2"></i>Explore Families
+        </a>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          {% for family in site.featured_families limit:6 %}
+          <div class="col-sm-6 col-md-4">
+            <a href="{{ '/families/#' | append: family.name | slugify | relative_url }}" class="card h-100 text-decoration-none family-card">
+              <div class="card-body text-center py-3">
+                <i class="bi bi-people-fill text-primary mb-2" style="font-size: 1.5rem;"></i>
+                <h6 class="card-title mb-0">{{ family.name }}</h6>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="text-center mt-3">
+          <a href="{{ '/families/' | relative_url }}" class="small text-muted">View all families <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-preview py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="fw-bold mb-4">Preserving Our Heritage</h2>
+        <p class="lead">
+          The Potawatomi Digital Archive is a community-driven initiative to preserve and share the rich cultural heritage, history, and family stories of the Potawatomi people.
+        </p>
+        <p>
+          Through photographs, documents, oral histories, and family records, we are building a lasting digital legacy for future generations. Every story matters, and every voice deserves to be heard.
+        </p>
+        <div class="mt-4">
+          <a href="{{ '/about/' | relative_url }}" class="btn btn-primary me-2">
+            Learn More
+          </a>
+          <a href="{{ '/contribute/' | relative_url }}" class="btn btn-outline-primary">
+            Share Your Story
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="stats-grid">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
+                <i class="bi bi-image fs-1 text-primary mb-2 d-block"></i>
+                <span class="stat-number d-block fs-3 fw-bold">5</span>
+                <span class="stat-label text-muted small">Photographs</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
+                <i class="bi bi-file-earmark-text fs-1 text-primary mb-2 d-block"></i>
+                <span class="stat-number d-block fs-3 fw-bold">5</span>
+                <span class="stat-label text-muted small">Documents</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
+                <i class="bi bi-mic fs-1 text-primary mb-2 d-block"></i>
+                <span class="stat-number d-block fs-3 fw-bold">5</span>
+                <span class="stat-label text-muted small">Oral Histories</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
+                <i class="bi bi-people fs-1 text-primary mb-2 d-block"></i>
+                <span class="stat-number d-block fs-3 fw-bold">7</span>
+                <span class="stat-label text-muted small">Families</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 text-center" style="background: linear-gradient(135deg, var(--primary-blue, #024985) 0%, #013a6b 100%);">
+  <div class="container py-4">
+    <h2 class="text-white fw-bold mb-3">Help Us Preserve Our Stories</h2>
+    <p class="text-white-50 lead mb-4">
+      Do you have photographs, documents, or stories to share? Every contribution helps build our collective memory.
+    </p>
+    <a href="{{ '/contribute/' | relative_url }}" class="btn btn-light btn-lg">
+      <i class="bi bi-upload me-2"></i>Submit Materials
+    </a>
+  </div>
+</section>
+
+<!-- Recent News -->
+<section class="recent-news py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0">Recent Updates</h2>
+      <a href="{{ '/news/' | relative_url }}" class="text-decoration-none">
+        View All <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="row g-4">
+      {% for post in site.posts limit:3 %}
+      <div class="col-md-4">
+        <article class="card h-100 shadow-sm">
+          {% if post.image %}
+          <img src="{{ post.image | relative_url }}" class="card-img-top" alt="{{ post.title }}">
+          {% endif %}
+          <div class="card-body">
+            <p class="text-muted small mb-2">{{ post.date | date: "%B %d, %Y" }}</p>
+            <h5 class="card-title">
+              <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+                {{ post.title }}
+              </a>
+            </h5>
+            <p class="card-text text-muted small">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+          </div>
+        </article>
+      </div>
+      {% else %}
+      <div class="col-12">
+        <p class="text-muted text-center py-4">No news posts yet. Check back soon for updates!</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

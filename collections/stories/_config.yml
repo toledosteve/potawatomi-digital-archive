@@ -1,0 +1,50 @@
+# Stories Collection
+# Part of the Potawatomi Digital Archive
+
+title: "Stories"
+tagline: "Written Narratives and Family Histories"
+description: "Written stories, memoirs, family histories, and personal narratives contributed by community members."
+
+# Site settings
+baseurl: "/collections/stories"
+url: ""
+
+# Parent site link
+parent-site:
+  title: "Potawatomi Digital Archive"
+  url: "/hub/"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Sass settings
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# Map settings
+latitude: 41.5
+longitude: -87.0
+zoom-level: 5
+
+# Navigation
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "Browse"
+    url: "/browse/"
+  - title: "Timeline"
+    url: "/timeline/"
+  - title: "Map"
+    url: "/map/"
+  - title: "About"
+    url: "/about/"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

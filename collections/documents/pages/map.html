@@ -1,0 +1,24 @@
+---
+layout: default
+title: Map
+permalink: /map/
+---
+
+<div class="container py-4">
+  <h1>Map View</h1>
+  <p class="text-muted">Explore documents by location</p>
+
+  <div id="collection-map" style="height: 500px; border-radius: 8px; border: 1px solid #e5e7eb;" class="mt-4"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var map = L.map('collection-map').setView([{{ site.latitude }}, {{ site.longitude }}], {{ site.zoom-level }});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+  {% for item in site.data.documents-metadata %}
+  {% if item.latitude and item.longitude %}
+  L.marker([{{ item.latitude }}, {{ item.longitude }}]).addTo(map).bindPopup('<strong>{{ item.title | escape }}</strong><br>{{ item.date }}<br>{{ item.location }}');
+  {% endif %}
+  {% endfor %}
+});
+</script>

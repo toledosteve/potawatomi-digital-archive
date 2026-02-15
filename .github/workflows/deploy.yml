@@ -1,0 +1,144 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Prepare output directory
+        run: |
+          mkdir -p _site/hub
+          mkdir -p _site/collections/photographs
+          mkdir -p _site/collections/documents
+          mkdir -p _site/collections/publications
+          mkdir -p _site/collections/oral-histories
+          mkdir -p _site/collections/stories
+          mkdir -p _site/collections/tribal-history
+
+      # Build Hub
+      - name: Build Hub
+        run: |
+          cd hub
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/hub"
+          cp -r _site/* ../_site/hub/
+        env:
+          JEKYLL_ENV: production
+
+      # Build Photographs Collection
+      - name: Build Photographs
+        run: |
+          cd collections/photographs
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/photographs"
+          cp -r _site/* ../../_site/collections/photographs/
+        env:
+          JEKYLL_ENV: production
+
+      # Build Documents Collection
+      - name: Build Documents
+        run: |
+          cd collections/documents
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/documents"
+          cp -r _site/* ../../_site/collections/documents/
+        env:
+          JEKYLL_ENV: production
+
+      # Build Publications Collection
+      - name: Build Publications
+        run: |
+          cd collections/publications
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/publications"
+          cp -r _site/* ../../_site/collections/publications/
+        env:
+          JEKYLL_ENV: production
+
+      # Build Oral Histories Collection
+      - name: Build Oral Histories
+        run: |
+          cd collections/oral-histories
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/oral-histories"
+          cp -r _site/* ../../_site/collections/oral-histories/
+        env:
+          JEKYLL_ENV: production
+
+      # Build Stories Collection
+      - name: Build Stories
+        run: |
+          cd collections/stories
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/stories"
+          cp -r _site/* ../../_site/collections/stories/
+        env:
+          JEKYLL_ENV: production
+
+      # Build Tribal History Collection
+      - name: Build Tribal History
+        run: |
+          cd collections/tribal-history
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/collections/tribal-history"
+          cp -r _site/* ../../_site/collections/tribal-history/
+        env:
+          JEKYLL_ENV: production
+
+      # Create root redirect to hub
+      - name: Create root index
+        run: |
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Potawatomi Digital Archive</title>
+            <meta http-equiv="refresh" content="0; url=hub/">
+            <link rel="canonical" href="hub/">
+          </head>
+          <body>
+            <p>Redirecting to <a href="hub/">Potawatomi Digital Archive</a>...</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

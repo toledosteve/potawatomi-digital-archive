@@ -1,0 +1,93 @@
+name: Export Approved Items and Rebuild
+
+on:
+  schedule:
+    # Run daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      collection:
+        description: 'Collection to export (leave empty for all)'
+        required: false
+        default: ''
+
+env:
+  API_URL: ${{ secrets.API_URL }}
+  API_KEY: ${{ secrets.API_KEY }}
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    outputs:
+      has_updates: ${{ steps.export.outputs.has_updates }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Export approved submissions
+        id: export
+        run: |
+          HAS_UPDATES=false
+
+          # Collections to export
+          COLLECTIONS=("tribal-history" "oral-histories" "family-archives" "documents")
+
+          # If a specific collection was requested, only export that one
+          if [ -n "${{ github.event.inputs.collection }}" ]; then
+            COLLECTIONS=("${{ github.event.inputs.collection }}")
+          fi
+
+          for COLLECTION in "${COLLECTIONS[@]}"; do
+            echo "Exporting $COLLECTION..."
+
+            # Call the API to export approved submissions
+            RESPONSE=$(curl -s -w "\n%{http_code}" \
+              -H "x-api-key: $API_KEY" \
+              "$API_URL/archive-submissions/export/$COLLECTION")
+
+            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+
+            if [ "$HTTP_CODE" = "200" ] && [ -n "$BODY" ]; then
+              # Append to existing CSV or create new one
+              CSV_FILE="collections/$COLLECTION/_data/${COLLECTION}-metadata.csv"
+
+              if [ -f "$CSV_FILE" ]; then
+                # Append new rows (skip header from export)
+                echo "$BODY" | tail -n +2 >> "$CSV_FILE"
+              else
+                # Create new file with header
+                echo "$BODY" > "$CSV_FILE"
+              fi
+
+              HAS_UPDATES=true
+              echo "Exported new items to $COLLECTION"
+            elif [ "$HTTP_CODE" = "204" ]; then
+              echo "No new items to export for $COLLECTION"
+            else
+              echo "Warning: Export failed for $COLLECTION (HTTP $HTTP_CODE)"
+            fi
+          done
+
+          echo "has_updates=$HAS_UPDATES" >> $GITHUB_OUTPUT
+
+      - name: Commit changes
+        if: steps.export.outputs.has_updates == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add collections/*/\_data/*.csv
+          git commit -m "chore: export approved archive submissions [automated]" || exit 0
+          git push
+
+  rebuild:
+    needs: export
+    if: needs.export.outputs.has_updates == 'true'
+    uses: ./.github/workflows/build-collection.yml

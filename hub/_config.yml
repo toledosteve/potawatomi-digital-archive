@@ -1,0 +1,137 @@
+# Potawatomi Digital Archive - Central Hub
+# Built with Jekyll and CollectionBuilder principles
+
+title: "Potawatomi Digital Archive"
+tagline: "Preserving Our Stories, Honoring Our Ancestors"
+description: "A community-driven digital archive preserving Potawatomi history, culture, and family stories for future generations."
+
+# Site settings
+url: "" # Will be set to your custom domain
+baseurl: "/hub"
+repository: # your-username/potawatomi-digital-archive
+
+# Organization info
+organization-name: "Potawatomi Digital Archive Project"
+organization-link: "#"
+# organization-logo: "/assets/img/logo.png"  # Add your logo here
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Sass settings
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# Collections configuration
+collections:
+  posts:
+    output: true
+    permalink: /news/:title/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Navigation
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "Collections"
+    url: "/collections/"
+  - title: "Families"
+    url: "/families/"
+  - title: "Search"
+    url: "/search/"
+  - title: "About"
+    url: "/about/"
+  - title: "Contribute"
+    url: "/contribute/"
+  - title: "Contact"
+    url: "/contact/"
+
+# Featured collections (organized by material TYPE)
+featured_collections:
+  - title: "Photographs"
+    description: "Historical and contemporary photographs documenting Potawatomi families, communities, and events"
+    url: "/collections/photographs/"
+    icon: "bi-image"
+    item_count: 5
+  - title: "Documents"
+    description: "Treaties, letters, government records, and personal papers"
+    url: "/collections/documents/"
+    icon: "bi-file-text"
+    item_count: 5
+  - title: "Publications"
+    description: "Books, newspaper articles, academic papers, and newsletters"
+    url: "/collections/publications/"
+    icon: "bi-book"
+    item_count: 5
+  - title: "Oral Histories"
+    description: "Audio and video recordings preserving voices and stories of our elders"
+    url: "/collections/oral-histories/"
+    icon: "bi-mic"
+    item_count: 5
+  - title: "Stories"
+    description: "Written narratives, memoirs, and family histories contributed by community members"
+    url: "/collections/stories/"
+    icon: "bi-journal-text"
+    item_count: 5
+  - title: "Tribal History"
+    description: "Migration stories, treaties, and historical records of the Potawatomi people"
+    url: "/collections/tribal-history/"
+    icon: "bi-clock-history"
+    item_count: 5
+
+# Featured families (for cross-referencing across collections)
+featured_families:
+  - name: "Toledo"
+    description: "Toledo family materials across all collections"
+  - name: "Wabaunsee"
+    description: "Wabaunsee family materials across all collections"
+  - name: "Bourassa"
+    description: "Bourassa family materials across all collections"
+  - name: "Pokagon"
+    description: "Pokagon family materials across all collections"
+  - name: "Wishkeno"
+    description: "Wishkeno family materials across all collections"
+  - name: "Nadeau"
+    description: "Nadeau family materials across all collections"
+  - name: "Shipshewana"
+    description: "Shipshewana family materials across all collections"
+
+# Contact info
+contact-email: # your-email@example.com
+contact-phone: # optional
+
+# Social media (optional)
+social:
+  facebook:
+  twitter:
+  instagram:
+  youtube:
+
+# Google Analytics (optional)
+google-analytics-id:
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE

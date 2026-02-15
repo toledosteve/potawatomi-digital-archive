@@ -1,0 +1,43 @@
+---
+layout: default
+title: Map
+permalink: /map/
+---
+
+<div class="container-fluid py-4">
+  <div class="container">
+    <h1>Map</h1>
+    <p class="text-muted">Explore items by location</p>
+  </div>
+
+  <div id="map" style="height: 500px; margin-top: 1rem;"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var map = L.map('map').setView([{{ site.latitude }}, {{ site.longitude }}], {{ site.zoom-level }});
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var items = [
+    {% for item in site.data.tribal-history-metadata %}
+    {% if item.latitude and item.longitude %}
+    {
+      title: "{{ item.title | escape }}",
+      date: "{{ item.date }}",
+      location: "{{ item.location }}",
+      lat: {{ item.latitude }},
+      lng: {{ item.longitude }}
+    },
+    {% endif %}
+    {% endfor %}
+  ];
+
+  items.forEach(function(item) {
+    L.marker([item.lat, item.lng]).addTo(map)
+      .bindPopup('<strong>' + item.title + '</strong><br>' + item.date + '<br><em>' + item.location + '</em>');
+  });
+});
+</script>

@@ -1,0 +1,119 @@
+---
+layout: page
+title: Search the Archive
+permalink: /search/
+description: Search across all collections in the Potawatomi Digital Archive
+---
+
+<div class="search-container mb-5">
+  <form id="search-form" class="row g-3">
+    <div class="col-md-10">
+      <div class="input-group input-group-lg">
+        <span class="input-group-text bg-white">
+          <i class="bi bi-search"></i>
+        </span>
+        <input type="text" class="form-control" id="search-input" placeholder="Search photographs, documents, oral histories..." aria-label="Search">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary btn-lg w-100">Search</button>
+    </div>
+  </form>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-3">
+    <h6 class="fw-bold mb-3">Filter by Collection</h6>
+    <div class="list-group list-group-flush">
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="tribal-history" checked>
+        Tribal History
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="oral-histories" checked>
+        Oral Histories
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="family-archives" checked>
+        Family Archives
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="documents" checked>
+        Historical Documents
+      </label>
+    </div>
+
+    <h6 class="fw-bold mb-3 mt-4">Filter by Type</h6>
+    <div class="list-group list-group-flush">
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="image" checked>
+        <i class="bi bi-image me-1"></i> Photographs
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="document" checked>
+        <i class="bi bi-file-text me-1"></i> Documents
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="audio" checked>
+        <i class="bi bi-music-note me-1"></i> Audio
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-2" type="checkbox" value="video" checked>
+        <i class="bi bi-camera-video me-1"></i> Video
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div id="search-results">
+      <div class="text-center py-5 text-muted">
+        <i class="bi bi-search display-4 mb-3 d-block opacity-50"></i>
+        <p class="lead">Enter a search term to explore the archive</p>
+        <p class="small">Search by keyword, name, date, location, or subject</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchForm = document.getElementById('search-form');
+  const searchInput = document.getElementById('search-input');
+  const resultsContainer = document.getElementById('search-results');
+
+  searchForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const query = searchInput.value.trim();
+
+    if (!query) {
+      return;
+    }
+
+    // Show loading state
+    resultsContainer.innerHTML = `
+      <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3">Searching the archive...</p>
+      </div>
+    `;
+
+    // TODO: Implement actual search functionality
+    // This will connect to a search index or API
+    setTimeout(function() {
+      resultsContainer.innerHTML = `
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i>
+          <strong>Search functionality coming soon!</strong>
+          <p class="mb-0 mt-2">
+            The cross-collection search feature is currently being developed.
+            In the meantime, you can browse individual collections using the
+            <a href="/collections/">Collections</a> page.
+          </p>
+        </div>
+      `;
+    }, 1000);
+  });
+});
+</script>

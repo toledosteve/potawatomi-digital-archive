@@ -1,0 +1,46 @@
+# Potawatomi Tribal History Collection
+
+title: "Potawatomi Tribal History"
+tagline: "Migration Stories, Treaties, and Historical Records"
+description: "A digital collection documenting the history, treaties, and migration of the Potawatomi people."
+
+url: ""
+baseurl: "/collections/tribal-history"
+
+# Metadata
+metadata: tribal-history-metadata
+
+# Build settings
+markdown: kramdown
+
+# Navigation
+nav:
+  - title: "Browse"
+    url: "/browse/"
+  - title: "Timeline"
+    url: "/timeline/"
+  - title: "Map"
+    url: "/map/"
+  - title: "About"
+    url: "/about/"
+
+# Map center (Great Lakes region)
+latitude: 42.5
+longitude: -86.0
+zoom-level: 5
+
+# Theme
+primary-color: "#2c5282"
+
+# Parent site
+parent-site:
+  title: "Potawatomi Digital Archive"
+  url: "/hub/"
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

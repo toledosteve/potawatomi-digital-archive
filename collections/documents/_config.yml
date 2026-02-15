@@ -1,0 +1,50 @@
+# Documents Collection
+# Part of the Potawatomi Digital Archive
+
+title: "Documents"
+tagline: "Treaties, Letters, and Historical Records"
+description: "Historical documents including treaties, correspondence, official records, and personal papers relating to the Potawatomi people."
+
+# Site settings
+baseurl: "/collections/documents"
+url: ""
+
+# Parent site link
+parent-site:
+  title: "Potawatomi Digital Archive"
+  url: "/hub/"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Sass settings
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# Map settings
+latitude: 41.5
+longitude: -87.0
+zoom-level: 5
+
+# Navigation
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "Browse"
+    url: "/browse/"
+  - title: "Timeline"
+    url: "/timeline/"
+  - title: "Map"
+    url: "/map/"
+  - title: "About"
+    url: "/about/"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

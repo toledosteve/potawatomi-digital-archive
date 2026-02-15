@@ -1,0 +1,50 @@
+# Photographs Collection
+# Part of the Potawatomi Digital Archive
+
+title: "Photographs"
+tagline: "Visual History of the Potawatomi People"
+description: "Historical and contemporary photographs documenting Potawatomi families, communities, events, and places."
+
+# Site settings
+baseurl: "/collections/photographs"
+url: ""
+
+# Parent site link
+parent-site:
+  title: "Potawatomi Digital Archive"
+  url: "/hub/"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Sass settings
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# Map settings
+latitude: 41.5
+longitude: -87.0
+zoom-level: 5
+
+# Navigation
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "Browse"
+    url: "/browse/"
+  - title: "Timeline"
+    url: "/timeline/"
+  - title: "Map"
+    url: "/map/"
+  - title: "About"
+    url: "/about/"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

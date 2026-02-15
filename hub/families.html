@@ -1,0 +1,119 @@
+---
+layout: default
+title: Browse by Family
+permalink: /families/
+---
+
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-lg-8">
+      <h1 class="page-title">Browse by Family</h1>
+      <p class="lead">Explore materials across all collections connected to specific Potawatomi families. Items can appear under multiple families when they document interconnected relationships.</p>
+    </div>
+  </div>
+
+  <!-- Family Index -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Jump to Family</h5>
+          <div class="d-flex flex-wrap gap-2">
+            {% for family in site.featured_families %}
+            <a href="#{{ family.name | slugify }}" class="btn btn-outline-primary btn-sm">{{ family.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Family Sections -->
+  {% for family in site.featured_families %}
+  <section id="{{ family.name | slugify }}" class="mb-5 pb-4 border-bottom">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <h2 class="h3">{{ family.name }} Family</h2>
+        <p class="text-muted">{{ family.description }}</p>
+        <p class="mb-0"><strong>Found in collections:</strong></p>
+        <div class="d-flex flex-wrap gap-1 mt-2">
+          <span class="badge bg-primary">Photographs</span>
+          <span class="badge bg-primary">Documents</span>
+          <span class="badge bg-primary">Stories</span>
+          <span class="badge bg-primary">Oral Histories</span>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="row g-3">
+          <!-- Photographs -->
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="card-title d-flex align-items-center">
+                  <i class="bi bi-image me-2 text-primary"></i>
+                  Photographs
+                </h6>
+                <p class="card-text small text-muted">Family portraits, gatherings, and historical photos</p>
+                <a href="/collections/photographs/browse/?family={{ family.name | url_encode }}" class="btn btn-sm btn-outline-primary">View Photos</a>
+              </div>
+            </div>
+          </div>
+          <!-- Documents -->
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="card-title d-flex align-items-center">
+                  <i class="bi bi-file-text me-2 text-primary"></i>
+                  Documents
+                </h6>
+                <p class="card-text small text-muted">Letters, records, and official papers</p>
+                <a href="/collections/documents/browse/?family={{ family.name | url_encode }}" class="btn btn-sm btn-outline-primary">View Documents</a>
+              </div>
+            </div>
+          </div>
+          <!-- Oral Histories -->
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="card-title d-flex align-items-center">
+                  <i class="bi bi-mic me-2 text-primary"></i>
+                  Oral Histories
+                </h6>
+                <p class="card-text small text-muted">Audio and video recordings</p>
+                <a href="/collections/oral-histories/browse/?family={{ family.name | url_encode }}" class="btn btn-sm btn-outline-primary">View Recordings</a>
+              </div>
+            </div>
+          </div>
+          <!-- Stories -->
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="card-title d-flex align-items-center">
+                  <i class="bi bi-journal-text me-2 text-primary"></i>
+                  Stories
+                </h6>
+                <p class="card-text small text-muted">Written narratives and family histories</p>
+                <a href="/collections/stories/browse/?family={{ family.name | url_encode }}" class="btn btn-sm btn-outline-primary">View Stories</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endfor %}
+
+  <!-- Add Your Family -->
+  <section class="mt-5 pt-4">
+    <div class="card bg-light border-0">
+      <div class="card-body text-center py-5">
+        <i class="bi bi-plus-circle display-4 text-primary mb-3"></i>
+        <h3>Don't See Your Family?</h3>
+        <p class="mb-4">We're always adding new materials. If you have photographs, documents, or stories about your Potawatomi family, we'd love to include them in the archive.</p>
+        <a href="{{ '/contribute/' | relative_url }}" class="btn btn-primary btn-lg">
+          <i class="bi bi-upload me-2"></i>Contribute Materials
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

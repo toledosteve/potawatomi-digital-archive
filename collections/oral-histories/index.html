@@ -1,0 +1,96 @@
+---
+layout: default
+title: Home
+---
+
+<div class="hero">
+  <div class="container">
+    <h1>{{ site.title }}</h1>
+    <p class="lead mb-4">{{ site.tagline }}</p>
+    <a href="{{ '/browse/' | relative_url }}" class="btn btn-light btn-lg me-2">
+      <i class="bi bi-grid me-2"></i>Browse Collection
+    </a>
+    <a href="{{ '/timeline/' | relative_url }}" class="btn btn-accent btn-lg">
+      <i class="bi bi-clock-history me-2"></i>View Timeline
+    </a>
+  </div>
+</div>
+
+<div style="background: #f8f9fa; padding: 2rem 0; border-bottom: 1px solid #e5e7eb;">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4 col-6 mb-3 mb-md-0">
+        <div style="font-size: 2rem; font-weight: 700; color: #024985;">{{ site.data.oral-histories-metadata | size }}</div>
+        <div style="color: #6b7280; font-size: 0.875rem; text-transform: uppercase;">Recordings</div>
+      </div>
+      <div class="col-md-4 col-6 mb-3 mb-md-0">
+        {% assign audio = site.data.oral-histories-metadata | where: "type", "Audio" | size %}
+        <div style="font-size: 2rem; font-weight: 700; color: #024985;">{{ audio }}</div>
+        <div style="color: #6b7280; font-size: 0.875rem; text-transform: uppercase;">Audio</div>
+      </div>
+      <div class="col-md-4 col-6">
+        {% assign video = site.data.oral-histories-metadata | where: "type", "Video" | size %}
+        <div style="font-size: 2rem; font-weight: 700; color: #024985;">{{ video }}</div>
+        <div style="color: #6b7280; font-size: 0.875rem; text-transform: uppercase;">Video</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="mb-1">Featured Recordings</h2>
+    <p class="text-muted mb-4">Voices and memories of our community</p>
+    <div class="row g-4">
+      {% for item in site.data.oral-histories-metadata limit:4 %}
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 160px; background: #f2f2f2;">
+            <i class="bi {% if item.type == 'Video' %}bi-camera-video{% else %}bi-mic{% endif %}" style="font-size: 3rem; color: #024985;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title h6 mb-2">{{ item.title }}</h5>
+            <p class="card-text small text-muted mb-2">{{ item.date }} {% if item.duration %}<span class="badge bg-light text-dark">{{ item.duration }}</span>{% endif %}</p>
+            <p class="card-text small">{{ item.description | truncate: 80 }}</p>
+          </div>
+          <div class="card-footer bg-white border-0 pt-0">
+            {% assign families = item.families | split: ";" %}
+            {% for f in families limit:2 %}<span class="badge bg-family me-1">{{ f | strip }}</span>{% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+      <a href="{{ '/browse/' | relative_url }}" class="btn btn-outline-primary">View All Recordings <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="py-5" style="background: #f8f9fa;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2>About This Collection</h2>
+        <p class="lead">{{ site.description }}</p>
+        <p>These recordings capture the voices, memories, and wisdom of Potawatomi elders and community members, preserving stories for future generations.</p>
+        <a href="{{ '/about/' | relative_url }}" class="btn btn-primary">Learn More</a>
+      </div>
+      <div class="col-lg-6">
+        <div id="preview-map" style="height: 350px; border-radius: 8px; border: 1px solid #e5e7eb;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var map = L.map('preview-map').setView([{{ site.latitude }}, {{ site.longitude }}], {{ site.zoom-level }});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+  {% for item in site.data.oral-histories-metadata %}
+  {% if item.latitude and item.longitude %}
+  L.marker([{{ item.latitude }}, {{ item.longitude }}]).addTo(map).bindPopup('<strong>{{ item.title | escape }}</strong><br>{{ item.date }}');
+  {% endif %}
+  {% endfor %}
+});
+</script>

@@ -46,7 +46,8 @@ jobs:
         run: |
           cd hub
           bundle install
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/hub"
+          echo "baseurl_root: \"${{ steps.pages.outputs.base_path }}\"" > _config_build.yml
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/hub" --config _config.yml,_config_build.yml
           cp -r _site/* ../_site/hub/
         env:
           JEKYLL_ENV: production

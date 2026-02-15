@@ -8,6 +8,7 @@ description: "A community-driven digital archive preserving Potawatomi history, 
 # Site settings
 url: "" # Will be set to your custom domain
 baseurl: "/hub"
+baseurl_root: "" # Root path for collections (set by GitHub Actions, e.g., /potawatomi-digital-archive)
 repository: # your-username/potawatomi-digital-archive
 
 # Organization info

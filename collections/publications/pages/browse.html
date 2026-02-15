@@ -12,9 +12,13 @@ permalink: /browse/
     {% for item in site.data.publications-metadata %}
     <div class="col-md-4 col-lg-3">
       <div class="card h-100">
+        {% if item.image %}
+        <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}" style="height: 150px; object-fit: cover;">
+        {% else %}
         <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
           <i class="bi bi-book" style="font-size: 2rem; color: #024985;"></i>
         </div>
+        {% endif %}
         <div class="card-body">
           <h5 class="card-title h6">{{ item.title }}</h5>
           <p class="card-text small text-muted">{{ item.date }}</p>
@@ -22,7 +26,12 @@ permalink: /browse/
         </div>
         <div class="card-footer bg-white border-0">
           {% assign subjects = item.subjects | split: ";" %}
-          {% for s in subjects limit:2 %}<span class="badge bg-secondary">{{ s | strip }}</span>{% endfor %}
+          {% for s in subjects limit:2 %}<span class="badge bg-secondary me-1">{{ s | strip }}</span>{% endfor %}
+          {% if item.object_location %}
+          <a href="{{ item.object_location }}" class="btn btn-sm btn-outline-primary mt-2 w-100" target="_blank">
+            <i class="bi bi-file-pdf me-1"></i>View PDF
+          </a>
+          {% endif %}
         </div>
       </div>
     </div>

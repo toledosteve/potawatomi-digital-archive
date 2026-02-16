@@ -39,6 +39,7 @@
     a { color: var(--accent-orange); text-decoration: none; }
     a:hover { color: #d9561a; }
 
+    header { position: sticky; top: 0; z-index: 1000; background: white; }
     .navbar { background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 0; }
     .navbar-brand { font-weight: 600; color: var(--primary-blue) !important; padding: 1rem 0; }
     .navbar-nav .nav-link { color: var(--text-dark) !important; font-weight: 500; font-size: 0.9375rem; padding: 1.25rem 1rem !important; text-transform: uppercase; letter-spacing: 0.025em; }
@@ -86,15 +87,15 @@
         </div>
       </div>
     </nav>
-
-    {% if site.parent-site %}
-    <div class="parent-link">
-      <div class="container">
-        <a href="{{ site.parent-site.url }}"><i class="bi bi-arrow-left me-1"></i>{{ site.parent-site.title }}</a>
-      </div>
-    </div>
-    {% endif %}
   </header>
+
+  {% if site.parent-site %}
+  <div class="parent-link">
+    <div class="container">
+      <a href="{{ site.parent-site.url }}"><i class="bi bi-arrow-left me-1"></i>{{ site.parent-site.title }}</a>
+    </div>
+  </div>
+  {% endif %}
 
   <main>{{ content }}</main>
 

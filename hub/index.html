@@ -21,7 +21,9 @@ title: Home
             </div>
             <h5 class="card-title fw-bold">{{ collection.title }}</h5>
             <p class="card-text text-muted small">{{ collection.description }}</p>
-            <span class="badge bg-light text-dark">{{ collection.item_count }} items</span>
+            {% assign key = collection.title | downcase | replace: ' ', '_' %}
+            {% assign count = site.data.counts[key] | default: collection.item_count | default: 0 %}
+            <span class="badge bg-light text-dark">{{ count }} items</span>
           </div>
           <div class="card-footer bg-white border-0 text-center pb-4">
             <a href="{{ site.baseurl_root }}{{ collection.url }}" class="btn btn-outline-primary">
@@ -105,21 +107,21 @@ title: Home
             <div class="col-6">
               <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
                 <i class="bi bi-image fs-1 text-primary mb-2 d-block"></i>
-                <span class="stat-number d-block fs-3 fw-bold">5</span>
+                <span class="stat-number d-block fs-3 fw-bold">{{ site.data.counts.photographs | default: 0 }}</span>
                 <span class="stat-label text-muted small">Photographs</span>
               </div>
             </div>
             <div class="col-6">
               <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
                 <i class="bi bi-file-earmark-text fs-1 text-primary mb-2 d-block"></i>
-                <span class="stat-number d-block fs-3 fw-bold">5</span>
+                <span class="stat-number d-block fs-3 fw-bold">{{ site.data.counts.documents | default: 0 }}</span>
                 <span class="stat-label text-muted small">Documents</span>
               </div>
             </div>
             <div class="col-6">
               <div class="stat-card text-center p-4 bg-white rounded shadow-sm">
                 <i class="bi bi-mic fs-1 text-primary mb-2 d-block"></i>
-                <span class="stat-number d-block fs-3 fw-bold">5</span>
+                <span class="stat-number d-block fs-3 fw-bold">{{ site.data.counts.oral_histories | default: 0 }}</span>
                 <span class="stat-label text-muted small">Oral Histories</span>
               </div>
             </div>

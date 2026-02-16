@@ -25,7 +25,9 @@ description: Browse all collections in the Potawatomi Digital Archive
         <h4 class="card-title fw-bold">{{ collection.title }}</h4>
         <p class="card-text text-muted">{{ collection.description }}</p>
         <div class="mt-3">
-          <span class="badge bg-light text-dark me-2">{{ collection.item_count }} items</span>
+          {% assign key = collection.title | downcase | replace: ' ', '_' %}
+          {% assign count = site.data.counts[key] | default: collection.item_count | default: 0 %}
+          <span class="badge bg-light text-dark me-2">{{ count }} items</span>
         </div>
       </div>
       <div class="card-footer bg-white border-0 text-center pb-4">

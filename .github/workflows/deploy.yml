@@ -130,8 +130,8 @@ jobs:
           for collection in photographs documents publications oral-histories stories tribal-history; do
             csv_file="collections/${collection}/_data/${collection}-metadata.csv"
             if [ -f "$csv_file" ]; then
-              # Count rows minus header
-              count=$(($(wc -l < "$csv_file") - 1))
+              # Count rows minus header (awk handles files without trailing newline)
+              count=$(awk 'END {print NR-1}' "$csv_file")
               [ $count -lt 0 ] && count=0
             else
               count=0

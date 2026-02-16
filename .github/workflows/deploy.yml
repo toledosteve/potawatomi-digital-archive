@@ -59,6 +59,14 @@ jobs:
         run: |
           echo "Fetching metadata from Google Sheets..."
 
+          # Create _data directories
+          mkdir -p collections/photographs/_data
+          mkdir -p collections/documents/_data
+          mkdir -p collections/publications/_data
+          mkdir -p collections/oral-histories/_data
+          mkdir -p collections/stories/_data
+          mkdir -p collections/tribal-history/_data
+
           # Photographs
           if [ -n "${{ vars.SHEET_PHOTOGRAPHS }}" ]; then
             curl -L "https://docs.google.com/spreadsheets/d/${{ vars.SHEET_PHOTOGRAPHS }}/export?format=csv" \

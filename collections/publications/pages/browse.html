@@ -11,7 +11,7 @@ permalink: /browse/
   <div class="row g-4 mt-3">
     {% for item in site.data.publications-metadata %}
     <div class="col-md-4 col-lg-3">
-      <div class="card h-100">
+      <a href="{{ '/item/?id=' | append: item.objectid | relative_url }}" class="card h-100 text-decoration-none text-dark item-card">
         {% if item.image %}
         <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}" style="height: 150px; object-fit: cover;">
         {% else %}
@@ -27,13 +27,11 @@ permalink: /browse/
         <div class="card-footer bg-white border-0">
           {% assign subjects = item.subjects | split: ";" %}
           {% for s in subjects limit:2 %}<span class="badge bg-secondary me-1">{{ s | strip }}</span>{% endfor %}
-          {% if item.object_location %}
-          <a href="{{ item.object_location }}" class="btn btn-sm btn-outline-primary mt-2 w-100" target="_blank">
-            <i class="bi bi-file-pdf me-1"></i>View PDF
-          </a>
-          {% endif %}
+          <span class="btn btn-sm btn-outline-primary mt-2 w-100">
+            <i class="bi bi-eye me-1"></i>View Details
+          </span>
         </div>
-      </div>
+      </a>
     </div>
     {% endfor %}
   </div>

@@ -34,6 +34,7 @@ permalink: /item/
       title: {{ item.title | jsonify }},
       description: {{ item.description | jsonify }},
       date: {{ item.date | jsonify }},
+      category: {{ item.category | jsonify }},
       subjects: {{ item.subjects | jsonify }},
       families: {{ item.families | jsonify }},
       people: {{ item.people | jsonify }},
@@ -136,6 +137,7 @@ permalink: /item/
             <strong>Details</strong>
           </div>
           <div class="card-body">
+            ${item.category ? `<p class="mb-2"><strong>Category:</strong> <span class="badge bg-primary">${item.category}</span></p>` : ''}
             ${item.date ? `<p class="mb-2"><strong>Date:</strong> ${item.date}</p>` : ''}
             ${item.description ? `<p class="mb-2"><strong>Description:</strong><br>${item.description}</p>` : ''}
             ${subjectsBadges ? `<p class="mb-2"><strong>Subjects:</strong><br>${subjectsBadges}</p>` : ''}

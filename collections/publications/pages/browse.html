@@ -25,6 +25,7 @@ permalink: /browse/
           <p class="card-text small">{{ item.description | truncate: 80 }}</p>
         </div>
         <div class="card-footer bg-white border-0">
+          {% if item.category %}<span class="badge bg-primary me-1">{{ item.category }}</span>{% endif %}
           {% assign subjects = item.subjects | split: ";" %}
           {% for s in subjects limit:2 %}<span class="badge bg-secondary me-1">{{ s | strip }}</span>{% endfor %}
           <span class="btn btn-sm btn-outline-primary mt-2 w-100">

@@ -93,23 +93,15 @@ featured_collections:
 
 # Featured families (for cross-referencing across collections)
 featured_families:
-  - name: "Toledo"
-    description: "Toledo family materials across all collections"
-  - name: "Wabaunsee"
-    description: "Wabaunsee family materials across all collections"
-  - name: "Bourassa"
-    description: "Bourassa family materials across all collections"
-  - name: "Pokagon"
-    description: "Pokagon family materials across all collections"
-  - name: "Wishkeno"
-    description: "Wishkeno family materials across all collections"
-  - name: "Nadeau"
-    description: "Nadeau family materials across all collections"
-  - name: "Shipshewana"
-    description: "Shipshewana family materials across all collections"
+  - name: "Anderson"
+    description: "Anderson family materials across all collections"
+  - name: "Hardin"
+    description: "Hardin family materials across all collections"
+  - name: "LaFramboise"
+    description: "LaFramboise family materials across all collections"
 
 # Contact info
-contact-email: # your-email@example.com
+contact-email: learnpotawatomi@gmail.com
 contact-phone: # optional
 
 # Social media (optional)

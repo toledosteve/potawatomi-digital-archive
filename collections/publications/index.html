@@ -48,6 +48,11 @@ title: Home
         <div class="card h-100">
           {% if item.image %}
           <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}" style="height: 160px; object-fit: cover;">
+          {% elsif item.object_location contains "drive.google.com/file/d/" %}
+          {% assign drive_parts = item.object_location | split: "/d/" %}
+          {% assign file_id_parts = drive_parts[1] | split: "/" %}
+          {% assign file_id = file_id_parts[0] %}
+          <img src="https://drive.google.com/thumbnail?id={{ file_id }}&sz=w400" class="card-img-top" alt="{{ item.title }}" style="height: 160px; object-fit: cover; background: #f2f2f2;">
           {% else %}
           <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 160px; background: #f2f2f2;">
             <i class="bi bi-book" style="font-size: 3rem; color: #024985;"></i>
